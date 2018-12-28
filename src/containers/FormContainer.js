@@ -117,32 +117,13 @@ class FormContainer extends Component {
 	handleClearForm(e) {
 		e.preventDefault();
 		this.setState({
-			ownerName: '',
-			monthlyIncome: '',
-			debt: '', 
-			assets: '',
-			displayRange: '',
-			selectedPets: [],
-			ownerAgeRangeSelection: '',
-			siblingSelection: [],
-			currentPetCount: 0,
-			description: '',
-			showViz: false,
-			monthlyExpensesObject: '',
+			regexText: '',
+			replaceText: '',
+			initText: '',
+			afterText: ''
 		});
 	}
 	handleFormSubmit(e) {
-		e.preventDefault();
-
-		var formPayload = {
-			assets: this.state.assets,
-			debt: this.state.debt, 
-			monthlyIncome: this.state.monthlyIncome,
-			monthlyExpensesObject: this.state.monthlyExpensesObject,
-			displayRange: this.state.displayRange }  
-		
-		this.setState({ formData: formPayload } );
-		this.setState({ showViz: true } );
 
 	}
 	render() {
@@ -198,13 +179,6 @@ class FormContainer extends Component {
 					content={this.state.afterText }
 					placeholder={'This will output text edited by regex '} />
 
-
-
-			
-				<input
-					type="submit"
-					className="btn btn-primary float-right"
-					value="Generate Viz"/>
 				<button
 					className="btn btn-link float-left"
 					onClick={this.handleClearForm}>Clear</button>
