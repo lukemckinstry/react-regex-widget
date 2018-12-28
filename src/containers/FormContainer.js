@@ -3,8 +3,6 @@ import SingleInput from '../components/SingleInput';
 import Highlighter from '../components/Highlighter'
 import styles from '../highlighterstyles.css';
 import latinize from 'latinize'
-
-
 import TextArea from '../components/TextArea';
 
 
@@ -29,21 +27,6 @@ class FormContainer extends Component {
 		this.renderName = this.renderName.bind(this);
 	}
 	componentDidMount() {
-		// fetch('./fake_db.json')
-		// 	.then(res => res.json())
-		// 	.then(data => {
-		// 		this.setState({
-		// 			ownerName: data.ownerName,
-		// 			petSelections: data.petSelections,
-		// 			selectedPets: data.selectedPets,
-		// 			ageOptions: data.ageOptions,
-		// 			ownerAgeRangeSelection: data.ownerAgeRangeSelection,
-		// 			siblingOptions: data.siblingOptions,
-		// 			siblingSelection: data.siblingSelection,
-		// 			currentPetCount: data.currentPetCount,
-		// 			description: data.description
-		// 		});
-		// 	});
 	}
 
 	handleInitChange(e) { this.setState({ initText: e.target.value }) }
@@ -57,9 +40,6 @@ class FormContainer extends Component {
 
 	handleReplaceChange(e) {
 		let input = e.target.value;
-		// this.setState({ replaceText: input }).then(()=>{
-    		
-  //   	})
 		this.setState({ replaceText: input }, () => this.writeReplace())
 	}
 
@@ -76,42 +56,16 @@ class FormContainer extends Component {
 	}
 	
 	writeReplace() {
-		console.log( this.evalRegex() )
-		console.log('write replacement ', this.state.initText  );
-		console.log('write replacement ', this.state.afterText  );
 		if ( this.evalRegex() ) {
 			var regex = new RegExp( this.state.regexText, 'g' );
 			var init = this.state.initText;
 			var replacement = this.state.replaceText;
 			var result = init.replace(regex , replacement  );
-			console.log( 'this is the result ', result )
 			this.setState({ afterText: result }, () => console.log('writeReplace: ', this.state.afterText));
 		} else {}
 
 	}
 
-	renderName() {
-		var html = []
-
-		var splitPattern = this.state.regexText != null ? new RegExp( this.state.regexText, "i") : '';
-		var name = this.state.initText;
-		var miniWords = name.split(splitPattern);
-		console.log( 'miniWords --> ', miniWords)
-
-		miniWords.forEach( (mw) => {
-			console.log( "-->", mw )
-			if (this.state.regexText != null && mw.toLowerCase() == this.state.regexText.toLowerCase()) {
-				html.push(<span className="bold">{mw}</span>)
-			} else {
-				html.push(<span>{mw}</span>)
-			}
-		} )
-		console.log( 'html -->', html)
-
-		return <span> {html}</span>;
-		this.setState({ initText: html });
-
-	}
 
 
 	handleClearForm(e) {
