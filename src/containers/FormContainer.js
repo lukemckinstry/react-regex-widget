@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import SingleInput from '../components/SingleInput';
-//import CurrencyInput from '../components/CurrencyInput';
+import Highlighter from '../components/Highlighter'
+import styles from '../highlighterstyles.css';
+import latinize from 'latinize'
+
 
 import TextArea from '../components/TextArea';
 
@@ -10,32 +13,10 @@ class FormContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ownerName: '',
-			monthlyIncome: '',
-			monthlyExpensesCount: '',
-			monthlyExpensesObject: '',
-			debt: '',
-			assets: '',
 			regexText: '',
 			replaceText: '',
 			initText: '',
-			afterText: '',
-			displayRange: '18mo',
-			formData: {
-				assets: '',
-				debt: '', 
-				monthlyIncome: '',
-				monthlyExpensesObject: '',
-				displayRange: '18mo' },
-			petSelections: [],
-			selectedPets: [],
-			ageOptions: [],
-			ownerAgeRangeSelection: '',
-			siblingOptions: [],
-			siblingSelection: [],
-			currentPetCount: 0,
-			description: '',
-			showViz: false,
+			afterText: ''			
 		};
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.handleClearForm = this.handleClearForm.bind(this);
@@ -165,6 +146,8 @@ class FormContainer extends Component {
 
 	}
 	render() {
+		const searchWords = this.state.regexText.split(/\s/).filter(word => word)
+
 		return (
 			<div>
 			<form className="container" onSubmit={this.handleFormSubmit}>
@@ -178,6 +161,18 @@ class FormContainer extends Component {
 					controlFunc={this.handleInitChange}
 					content={this.state.initText }
 					placeholder={'Enter text to edit with regex'} />
+				 
+				<Highlighter
+			          activeClassName={styles.Active}
+			          activeIndex={-1}
+			          caseSensitive={false}
+			          highlightClassName={styles.Highlight}
+			          highlightStyle={{ fontWeight: 'normal' }}
+			          sanitize={latinize}
+			          searchWords={searchWords}
+			          textToHighlight={this.state.initText}
+			        />
+
 				<TextArea
 					inputType={'text'}
 					title={'Regex Find'}
