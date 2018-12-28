@@ -21,7 +21,6 @@ class FormContainer extends Component {
 		this.handleAfterChange = this.handleAfterChange.bind(this);
 		this.evalRegex = this.evalRegex.bind(this);
 		this.writeReplace = this.writeReplace.bind(this);
-		this.renderName = this.renderName.bind(this);
 	}
 	componentDidMount() {
 	}
