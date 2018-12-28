@@ -10,32 +10,10 @@ class FormContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ownerName: '',
-			monthlyIncome: '',
-			monthlyExpensesCount: '',
-			monthlyExpensesObject: '',
-			debt: '',
-			assets: '',
 			regexText: '',
 			replaceText: '',
 			initText: '',
-			afterText: '',
-			displayRange: '18mo',
-			formData: {
-				assets: '',
-				debt: '', 
-				monthlyIncome: '',
-				monthlyExpensesObject: '',
-				displayRange: '18mo' },
-			petSelections: [],
-			selectedPets: [],
-			ageOptions: [],
-			ownerAgeRangeSelection: '',
-			siblingOptions: [],
-			siblingSelection: [],
-			currentPetCount: 0,
-			description: '',
-			showViz: false,
+			afterText: ''
 		};
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.handleClearForm = this.handleClearForm.bind(this);
@@ -136,32 +114,13 @@ class FormContainer extends Component {
 	handleClearForm(e) {
 		e.preventDefault();
 		this.setState({
-			ownerName: '',
-			monthlyIncome: '',
-			debt: '', 
-			assets: '',
-			displayRange: '',
-			selectedPets: [],
-			ownerAgeRangeSelection: '',
-			siblingSelection: [],
-			currentPetCount: 0,
-			description: '',
-			showViz: false,
-			monthlyExpensesObject: '',
+			regexText: '',
+			replaceText: '',
+			initText: '',
+			afterText: ''
 		});
 	}
 	handleFormSubmit(e) {
-		e.preventDefault();
-
-		var formPayload = {
-			assets: this.state.assets,
-			debt: this.state.debt, 
-			monthlyIncome: this.state.monthlyIncome,
-			monthlyExpensesObject: this.state.monthlyExpensesObject,
-			displayRange: this.state.displayRange }  
-		
-		this.setState({ formData: formPayload } );
-		this.setState({ showViz: true } );
 
 	}
 	render() {
@@ -204,12 +163,6 @@ class FormContainer extends Component {
 					placeholder={'This will output text edited by regex '} />
 
 
-
-			
-				<input
-					type="submit"
-					className="btn btn-primary float-right"
-					value="Generate Viz"/>
 				<button
 					className="btn btn-link float-left"
 					onClick={this.handleClearForm}>Clear</button>
